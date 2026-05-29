@@ -1,12 +1,17 @@
-FROM busybox
-COPY . /mailer
+FROM alpine:latest
+
 WORKDIR /mailer
 
-RUN adduser -DHs /bin/bash example
+COPY . ./
+
+RUN adduser -DHs /bin/sh example
 
 RUN chown example mailer.sh
+
 RUN chmod a+x mailer.sh
-EXPOSE 33333
 
 USER example
-CMD ["/mailer/mailer.sh"]
+
+CMD ["mailer.sh"]
+
+EXPOSE 33333
